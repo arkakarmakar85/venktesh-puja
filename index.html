@@ -231,7 +231,7 @@
           document.getElementById('message').style.display = 'block';
           document.getElementById('overlaySpinner').style.display = 'none';
 
-          const upiLink = `upi://pay?pa=${upiID}&pn=${encodeURIComponent('Durga Puja Collection')}&am=2600&cu=INR&tn=${encodeURIComponent(tn)}&tr=${tr}`;
+          const upiLink = `upi://pay?pa=${upiID}&pn=${encodeURIComponent('Durga Puja Collection')}&am=2&cu=INR&tn=${encodeURIComponent(tn)}&tr=${tr}`;
           window.location.href = upiLink;
         })
         .catch(error => {
