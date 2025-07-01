@@ -111,15 +111,48 @@
         transform: scale(1);
       }
     }
+
+    html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.overlay-spinner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 9999;
+  display: none; /* Hidden by default */
+  align-items: center;
+  justify-content: center;
+}
+
+.spinner-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
   </style>
 </head>
 
 <body>
+  <div id="overlaySpinner" class="overlay-spinner">
+  <div class="spinner-wrapper">
+    <div class="spinner-border text-light" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+</div>
   <a href="https://wa.me/+917044759261" target="_blank" class="whatsapp-float" aria-label="Chat on WhatsApp">
-  <img src="https://img.icons8.com/fluency/48/000000/whatsapp.png" alt="WhatsApp Chat">
-  <span class="whatsapp-text">Connect us</span>
-</a>
- 
+    <img src="https://img.icons8.com/fluency/48/000000/whatsapp.png" alt="WhatsApp Chat">
+    <span class="whatsapp-text">Connect us</span>
+  </a>
+
   <div class="hero">
     <h1 align="center">Venktesh Enclave 2 - Online Payment</h1>
   </div>
@@ -161,8 +194,8 @@
   </footer>
 
   <script>
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbxIEIiShK89UkCtv_JQVi05SFsB5f-vwbFeJxijyKKoDFqr55V6Mdl2ejIj3O0BLz1HBQ/exec'; 
-    const upiID = 'arnab82407535@barodampay'; 
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxIEIiShK89UkCtv_JQVi05SFsB5f-vwbFeJxijyKKoDFqr55V6Mdl2ejIj3O0BLz1HBQ/exec';
+    const upiID = 'arnab82407535@barodampay';
 
     document.getElementById('paymentForm').addEventListener('submit', function (e) {
       e.preventDefault();
@@ -172,7 +205,7 @@
       const flat = document.getElementById('flat').value.trim();
       const phone = document.getElementById('phone').value.trim();
 
-      if (!name ||!block || !flat || !phone) {
+      if (!name || !block || !flat || !phone) {
         alert('Please fill in all fields');
         return;
       }
@@ -180,18 +213,22 @@
       const tr = phone;
       const tn = name;
 
-      
+      document.getElementById('overlaySpinner').style.display = 'flex';
       fetch(scriptURL, {
         method: 'POST',
         body: new URLSearchParams({ name, block, flat, phone, ref: tr })
       })
         .then(() => {
           document.getElementById('message').style.display = 'block';
+          document.getElementById('overlaySpinner').style.display = 'none';
 
           const upiLink = `upi://pay?pa=${upiID}&pn=Venktesh&am=2&cu=INR&tn=${encodeURIComponent(tn)}&tr=${tr}`;
           window.location.href = upiLink;
         })
-        .catch(error => alert('Error saving data: ' + error.message));
+        .catch(error => {
+          alert('Error saving data: ' + error.message);
+          document.getElementById('overlaySpinner').style.display = 'none';
+        });
     });
   </script>
 
