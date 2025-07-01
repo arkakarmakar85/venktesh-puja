@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Venktesh Enclave 2 - Online Payment</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: #fffbe6;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    .hero {
+      background: url('building.jpg') center/cover no-repeat;
+      height: 200px;
+      border-bottom: 5px solid #ffca28;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero h1 {
+      background: rgba(255, 255, 255, 0.85);
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #7a5901;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .card {
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+      background-color: #fffdf3;
+    }
+
+    .btn-primary {
+      background-color: #ffca28;
+      color: #000;
+      font-weight: 600;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background-color: #ffc107;
+    }
+
+    .form-label {
+      color: #5c4500;
+    }
+
+    .alert-success {
+      background-color: #fff3cd;
+      color: #856404;
+      border-color: #ffeeba;
+    }
+
+    .success-msg {
+      display: none;
+    }
+
+    .whatsapp-float {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 999;
+      animation: pulse 1.5s infinite;
+      background-color: #25d366;
+      padding: 10px 16px;
+      border-radius: 50px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+
+    .whatsapp-float:hover {
+      background-color: #1ebe5d;
+    }
+
+    .whatsapp-float img {
+      width: 28px;
+      height: 28px;
+      margin-right: 8px;
+    }
+
+    .whatsapp-text {
+      font-weight: 600;
+      font-size: 14px;
+      color: white;
+      white-space: nowrap;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.05);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a href="https://wa.me/+917044759261" target="_blank" class="whatsapp-float" aria-label="Chat on WhatsApp">
+  <img src="https://img.icons8.com/fluency/48/000000/whatsapp.png" alt="WhatsApp Chat">
+  <span class="whatsapp-text">Connect us</span>
+</a>
+ 
+  <div class="hero">
+    <h1 align="center">Venktesh Enclave 2 - Online Payment</h1>
+  </div>
+
+  <div class="container d-flex  justify-content-center pt-4">
+    <div class="col-12 ">
+      <div class="card p-4">
+        <form id="paymentForm">
+          <div class="mb-3">
+            <label for="name" class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="name" required />
+          </div>
+          <div class="mb-3">
+            <label for="block" class="form-label">Block No</label>
+            <input type="text" class="form-control" id="block" required />
+          </div>
+          <div class="mb-3">
+            <label for="flat" class="form-label">Flat No</label>
+            <input type="text" class="form-control" id="flat" required />
+          </div>
+          <div class="mb-3">
+            <label for="phone" class="form-label">Phone No</label>
+            <input type="tel" class="form-control" id="phone" required />
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Pay 2600 via UPI/Google/Phone Pay</button>
+        </form>
+        <div id="message" class="alert alert-success mt-3 success-msg">
+          ✅ Your data has been saved! Please complete your payment in UPI Payment.
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Footer -->
+  <footer class="text-center mt-5 py-3" style="color: #5c4500; font-size: 0.95rem;">
+    For any issue, directly contact
+    <a href="tel:9002678141" style="color: #d17b00; text-decoration: none; font-weight: 600;">
+      9002678141
+    </a>.
+  </footer>
+
+  <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxIEIiShK89UkCtv_JQVi05SFsB5f-vwbFeJxijyKKoDFqr55V6Mdl2ejIj3O0BLz1HBQ/exec'; 
+    const upiID = 'arnab82407535@barodampay'; 
+
+    document.getElementById('paymentForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value.trim();
+      const block = document.getElementById('block').value.trim();
+      const flat = document.getElementById('flat').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+
+      if (!name ||!block || !flat || !phone) {
+        alert('Please fill in all fields');
+        return;
+      }
+
+      const tr = phone;
+      const tn = name;
+
+      
+      fetch(scriptURL, {
+        method: 'POST',
+        body: new URLSearchParams({ name, block, flat, phone, ref: tr })
+      })
+        .then(() => {
+          document.getElementById('message').style.display = 'block';
+
+          const upiLink = `upi://pay?pa=${upiID}&pn=Venktesh&am=2&cu=INR&tn=${encodeURIComponent(tn)}&tr=${tr}`;
+          window.location.href = upiLink;
+        })
+        .catch(error => alert('Error saving data: ' + error.message));
+    });
+  </script>
+
+
+</body>
+
+</html>
