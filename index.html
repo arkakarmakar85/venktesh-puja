@@ -128,7 +128,6 @@
       background-color: rgba(0, 0, 0, 0.6);
       z-index: 9999;
       display: none;
-      /* Hidden by default */
       align-items: center;
       justify-content: center;
     }
@@ -143,6 +142,7 @@
 </head>
 
 <body>
+  <!-- Fullscreen Spinner -->
   <div id="overlaySpinner" class="overlay-spinner">
     <div class="spinner-wrapper">
       <div class="spinner-border text-light" role="status">
@@ -150,23 +150,29 @@
       </div>
     </div>
   </div>
-  <footer class="text-center mt-5 py-3" style="color: #5c4500; font-size: 0.95rem;">
-    For any technical issue, directly contact <strong>Arka Karmakar</strong> at
-    <a href="tel:9002678141" style="color: #d17b00; text-decoration: none; font-weight: 600;">
-      9002678141
-    </a>.
-  </footer>
+
+  <!-- WhatsApp Chat Button -->
   <a href="https://wa.me/+917044759261" target="_blank" class="whatsapp-float" aria-label="Chat on WhatsApp">
     <img src="https://img.icons8.com/fluency/48/000000/whatsapp.png" alt="WhatsApp Chat">
-    <span class="whatsapp-text">Connect us</span>
+    <span class="whatsapp-text">Need Help?</span>
   </a>
 
+  <!-- Hero Banner -->
   <div class="hero">
     <h1 align="center">Venktesh Enclave 2 - Durga Puja Payment</h1>
   </div>
 
-  <div class="container d-flex  justify-content-center pt-4">
-    <div class="col-12 ">
+  <!-- ✅ Contact Info After Banner -->
+  <div class="text-center py-3" style="color: #5c4500; font-size: 0.95rem; padding-left: 20px; padding-right: 20px;">
+    For any technical issue, directly contact <strong>Arka Karmakar</strong> at
+    <a href="tel:9002678141" style="color: #d17b00; text-decoration: none; font-weight: 600;">
+      9002678141
+    </a>.
+  </div>
+
+  <!-- Payment Form -->
+  <div class="container d-flex justify-content-center pt-4">
+    <div class="col-12">
       <div class="card p-4">
         <form id="paymentForm">
           <div class="mb-3">
@@ -193,9 +199,8 @@
       </div>
     </div>
   </div>
-  <!-- Footer -->
-  
 
+  <!-- JS Script -->
   <script>
     const scriptURL = 'https://script.google.com/macros/s/AKfycbxIEIiShK89UkCtv_JQVi05SFsB5f-vwbFeJxijyKKoDFqr55V6Mdl2ejIj3O0BLz1HBQ/exec';
     const upiID = 'arnab82407535@barodampay';
@@ -217,6 +222,7 @@
       const tn = name;
 
       document.getElementById('overlaySpinner').style.display = 'flex';
+
       fetch(scriptURL, {
         method: 'POST',
         body: new URLSearchParams({ name, block, flat, phone, ref: tr })
@@ -234,8 +240,6 @@
         });
     });
   </script>
-
-
 </body>
 
 </html>
