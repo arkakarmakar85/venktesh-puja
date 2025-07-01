@@ -203,7 +203,7 @@
   <!-- JS Script -->
   <script>
     const scriptURL = 'https://script.google.com/macros/s/AKfycbxIEIiShK89UkCtv_JQVi05SFsB5f-vwbFeJxijyKKoDFqr55V6Mdl2ejIj3O0BLz1HBQ/exec';
-    const upiID = 'arnab82407535@barodampay';
+    const upiID = 'arkakarmakar85-2@oksbi';
 
     document.getElementById('paymentForm').addEventListener('submit', function (e) {
       e.preventDefault();
@@ -231,7 +231,7 @@
           document.getElementById('message').style.display = 'block';
           document.getElementById('overlaySpinner').style.display = 'none';
 
-          const upiLink = `upi://pay?pa=${upiID}&pn=${encodeURIComponent('Durga Puja Collection')}&am=2&cu=INR&tn=${encodeURIComponent(tn)}&tr=${tr}`;
+          const upiLink = `upi://pay?pa=${upiID}&pn=${encodeURIComponent('Durga Puja Collection')}&am=10&cu=INR`;
           window.location.href = upiLink;
         })
         .catch(error => {
